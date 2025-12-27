@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-demo-app-multicontainer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: go-demo-app-multicontainer
+  template:
+    metadata:
+      labels:
+        app: go-demo-app-multicontainer
+    spec:
+      containers:
+      - name: go-demo-app
+        image: denvasyliev/go-demo-app:v1.0.0
+      - name: sidecar
+        image: busybox
+        command: ["/bin/sh", "-c", "while true; do echo 'hello from sidecar' >> /var/log/sidecar.log; sleep 5; done"]

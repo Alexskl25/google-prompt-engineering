@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: go-demo-app-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: go-demo-app-job
+        image: busybox
+        command:
+        - /bin/sh
+        - -c
+        - echo "Hello from the job"
+      restartPolicy: Never
